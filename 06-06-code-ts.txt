@@ -1,0 +1,17 @@
+if (!validation.isVideo) {
+  throw new Error(
+    "VIDEO_GENERATION_FAILED: provider returned non-video media."
+  );
+}
+
+if (validation.durationSeconds < 1) {
+  throw new Error(
+    "VIDEO_GENERATION_FAILED: clip has insufficient duration."
+  );
+}
+
+if (validation.frameCount < 2) {
+  throw new Error(
+    "VIDEO_GENERATION_FAILED: clip contains insufficient frames."
+  );
+}

@@ -1,0 +1,29 @@
+User clicks: GENERATE VIDEO
+       ↓
+Create VideoJob (`status: "queued"`, `attempts: 0`)
+       ↓
+Worker picks job (`status: "planning"`)
+       ↓
+Neural Core creates screenplay (Beat analysis & screenplay generation)
+       ↓
+Scene planner (Scene breakdown, narrative objectives, lighting & color grades)
+       ↓
+Shot planner (Focal lengths, lens models, camera motion profiles, seed locks)
+       ↓
+Video provider (`status: "generating"`, dispatching to Runway Gen-3, Luma Ray-2, SVD, Sora, or FFmpeg)
+       ↓
+Actual clip (Temporal motion synthesis with continuous frame movement)
+       ↓
+QC (Temporal stability, motion artifact checks, frame jitter analysis)
+       ↓
+If failed → retry (Scene attempt counter incremented with automatic regeneration)
+       ↓
+Next scene (Iterates until all scenes pass QC)
+       ↓
+FFmpeg (`status: "compositing"`, non-linear EDL assembly & transition rendering)
+       ↓
+Audio (Voiceover dialogue stem alignment + multi-track music/SFX mixing)
+       ↓
+Final QC (`status: "quality_check"`, LUFS loudness normalization & zero-mock SHA-256 validation)
+       ↓
+MP4 (`status: "completed"`, faststart streamable master video output)

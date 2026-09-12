@@ -1,0 +1,48 @@
+NEURAL CORE
+    │
+    ▼
+VIDEO DIRECTOR
+    │
+ ┌──┴───────────────┐
+ ▼                  ▼
+STORY ENGINE   STYLE ENGINE
+ │                  │
+ └──┬───────────────┘
+    ▼
+SHOT PLANNER
+    │
+    ▼
+VIDEO MODEL ROUTER
+    │
+ ┌──┼───────────────┐
+ ▼  ▼               ▼
+Provider A     Provider B     Provider C (Runway Gen-3 / Luma Ray-2 / SVD-XT / Sora / FFmpeg)
+ │  │               │
+ └──┼───────────────┘
+    ▼
+REAL VIDEO (Continuous Temporal Motion)
+    │
+    ▼
+QUALITY CONTROL (QC)
+    │
+ ┌──┴───────────────┐
+ │                  │
+PASS               FAIL
+ │                  │
+ ▼                  ▼
+COMPOSITOR        RETRY (Auto-reroute through Video Model Router)
+ │                  │
+ ▼                  │
+VOICE + MUSIC       │
+ │                  │
+ ▼                  │
+FFmpeg ◄────────────┘
+ │
+ ▼
+FINAL MP4 (H.264 Faststart Multiplex)
+ │
+ ▼
+FINAL VERIFICATION (LUFS & SHA-256 Digest Check)
+ │
+ ▼
+STORAGE / PUBLISH

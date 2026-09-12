@@ -1,0 +1,22 @@
+export type VideoJob = {
+  id: string;
+
+  projectId: string;
+
+  status:
+    | "queued"
+    | "planning"
+    | "generating"
+    | "compositing"
+    | "quality_check"
+    | "completed"
+    | "failed";
+
+  currentScene?: number;
+
+  totalScenes: number;
+
+  attempts: number;
+
+  error?: string;
+};

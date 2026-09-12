@@ -1,0 +1,58 @@
+export class VideoPipeline {
+  constructor(
+    private readonly provider: VideoProvider,
+    private readonly renderer: FFmpegRenderer,
+    private readonly qc: VideoQualityControl
+  ) {}
+
+  async generate(project: VideoProject): Promise<string> {
+    for (const scene of project.scenes) {
+      const clip = await this.provider.generate({
+        prompt: this.buildScenePrompt(project, scene),
+        durationSeconds: scene.durationSeconds,
+        width: 1920,
+        height: 1080,
+        fps: 24
+      });
+
+      scene.generatedClip = clip;
+      await this.qc.validateClip(clip);
+    }
+
+    const finalVideo = await this.renderer.compose(project);
+    await this.qc.validateFinalVideo(finalVideo);
+
+    return finalVideo;
+  }
+
+  private buildScenePrompt(project: VideoProject, scene: VideoScene) {
+    return `
+Create an actual moving video clip.
+
+Project:
+${project.title}
+
+Scene:
+${scene.description}
+
+Action:
+${scene.action ?? "Natural continuous movement"}
+
+Camera:
+${scene.camera ?? "Cinematic camera movement"}
+
+Visual style:
+${scene.visualStyle ?? "Cinematic realistic"}
+
+Duration:
+${scene.durationSeconds} seconds.
+
+IMPORTANT:
+Generate temporal motion.
+Do not return a still image.
+Do not create a slideshow.
+Do not create a sequence of still frames.
+The output must be a real video clip with continuous motion.
+`;
+  }
+}

@@ -1,0 +1,10 @@
+export type MediaValidation = {
+  isVideo: boolean;
+  durationSeconds: number;
+  frameCount: number;
+  width: number;
+  height: number;
+  fps: number;
+  hasMotion: boolean;
+  hasAudio: boolean;
+};

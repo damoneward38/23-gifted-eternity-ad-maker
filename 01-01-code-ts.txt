@@ -1,0 +1,29 @@
+export type VideoProject = {
+  id: string;
+  title: string;
+  prompt: string;
+  scenes: VideoScene[];
+  voice?: VoiceTrack;
+  music?: AudioTrack;
+  soundEffects?: AudioTrack[];
+};
+
+export type VideoScene = {
+  id: string;
+  order: number;
+  description: string;
+  durationSeconds: number;
+  camera?: string;
+  action?: string;
+  dialogue?: string;
+  visualStyle?: string;
+  generatedClip?: VideoClip;
+};
+
+export type VoiceTrack = {
+  url: string;
+};
+
+export type AudioTrack = {
+  url: string;
+};
